@@ -2,10 +2,52 @@
 <html data-cast-api-enabled="true">
   <head>
     <title>AFro Google Cast Demo</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Test</h1>
+  <div class="page-header">
+    <h1>GDG Sender App</h1>
+  </div>
 
-    <script type="text/javascript" src="app.js"></script>
+
+
+  <form class="form-horizontal">
+    <p>
+
+      <legend>We will post these fields to the receiver app on the Chromecast</legend>
+      <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+          <input type="text" id="name" placeholder="Enter you name here"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="text" id="email" placeholder="Enter you email address"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="favorite">Favorite Saying</label>
+        <div class="controls">
+          <input type="text" id="favorite" placeholder="Enter you favorite saying"/>
+        </div>
+      </div>
+
+    </p>
+  </form>
+  <form class="form-horizontal">
+    <p>
+      <legend>Here are the available Chromecasts near you:</legend>
+      <ul class="receivers"></ul>
+
+    </p>
+  </form>
+
+  <div class="btn btn-success" style="display:none;">Send To Chromecast</div>
+
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
   </body>
 </html>

@@ -8,6 +8,7 @@
 </div>
 </body>
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
 <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
 <script>
   $(function() {
@@ -24,7 +25,13 @@
     channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
 
     function onMessage(event) {
+      var html = "";
+      html+="<p>Name: "+event.message.name+"</p>";
+      html+="<p>Email: "+event.message.email+"</p>";
+      html+="<p>Favorite Saying: "+event.message.favorite+"</p>";
+
       $messages.html(event.message.type);
+      $messages.append(html);
       //WE NEED TO DO SOMETHING WITH event.message.randomWord
 
 
