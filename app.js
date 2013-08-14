@@ -18,5 +18,25 @@ if (cast && cast.isAvailable) {
 }
 
 function init(){
-  alert('SHIZ WAS INIT\'D');
+
+  /*
+   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
+        Now that the extension has recognized our page as a Chromecast enabled page,
+        we need to discover all of the nearby devices
+   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
+   */
+
+  // the @cast object get populated by the Chromecast extension once it validates that this is a true sender page
+  cast_api = new cast.Api();
+
+  // Find all devices that are nearby that are capable of performing "YouTube" activities, AKA: All Nearby Chromecasts
+  cast_api.addReceiverListener("YouTube", onReceiverList);
+
+}
+
+function onReceiverList(list) {
+  if(!list || !list.length) return;
+
+  console.log("HERE IS THE BLOODY LIST OF RECEIVERS", list);
+
 }
