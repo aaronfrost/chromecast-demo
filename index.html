@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>AFro Receiver App</title>
+</head>
+<body style="background-color:greenyellow;">
+<div class="messages">
+  <h1>Waiting for Messages...</h1>
+</div>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
+<script>
+  $(function() {
+    var namespace = "AF-GDG-GOOGLECAST-DEMO";
+    var receiver = new cast.receiver.Receiver('36575150-be79-4eae-a940-11b0ed0ae78b_1', [namespace]),
+        channelHandler = new cast.receiver.ChannelHandler(namespace),
+        $messages = $('.messages');
+
+    channelHandler.addChannelFactory(
+        receiver.createChannelFactory(namespace));
+
+    receiver.start();
+
+    channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
+
+    function onMessage(event) {
+      $messages.html(event.message.type);
+      //WE NEED TO DO SOMETHING WITH event.message.randomWord
+
+
+      setTimeout(function(){
+        //CLOSES BACK TO THE MAIN SCREEN
+        window.close();
+      }, 5000);
+
+
+    }
+  });
+</script>
+</html>

@@ -18,14 +18,6 @@ if (cast && cast.isAvailable) {
 }
 
 function init(){
-
-  /*
-   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
-        Now that the extension has recognized our page as a Chromecast enabled page,
-        we need to discover all of the nearby devices
-   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
-   */
-
   // the @cast object get populated by the Chromecast extension once it validates that this is a true sender page
   cast_api = new cast.Api();
 
@@ -37,6 +29,30 @@ function init(){
 function onReceiverList(list) {
   if(!list || !list.length) return;
 
-  console.log("HERE IS THE BLOODY LIST OF RECEIVERS", list);
+  /*
+   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
+      Now that we have he receiver, we need to launch something to the Chromecast
+   AFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAFAF
+   */
+  var receiver = list[0];
+  sendSomethingToBloodyReceiver(receiver);
+}
 
+function sendSomethingToBloodyReceiver(r){
+  console.log('Sending Launch Request');
+  var request = new cast.LaunchRequest("36575150-be79-4eae-a940-11b0ed0ae78b_1", r);
+  request.description = new cast.LaunchDescription();
+  request.description.text = "HELLO GDG UTAH";
+  request.description.url = "https://developers.google.com/groups/chapter/111917982940065392922/";
+  cast_api.launch(request, onLaunch);
+}
+
+function onLaunch(activity){
+  console.log('In Launch Request Callback')
+  if (activity.status === 'running') {
+    cv_activity = activity;
+
+    //REMIND ME TO PUT IN A RANDOM WORD HERE
+    cast_api.sendMessage(cv_activity.activityId, 'AF-GDG-GOOGLECAST-DEMO', {type: 'Hello GDG Utah', randomWord:''});
+  }
 }
