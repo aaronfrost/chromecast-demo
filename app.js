@@ -40,7 +40,7 @@ function onReceiverList(list) {
 
 function sendSomethingToBloodyReceiver(r){
   console.log('Sending Launch Request');
-  var request = new cast.LaunchRequest("36575150-be79-4eae-a940-11b0ed0ae78b_1", r);
+  var request = new cast.LaunchRequest("YOUR_APP_ID", r);
   request.description = new cast.LaunchDescription();
   request.description.text = "HELLO GDG UTAH";
   request.description.url = "https://developers.google.com/groups/chapter/111917982940065392922/";
